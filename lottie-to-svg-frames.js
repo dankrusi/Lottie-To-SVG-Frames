@@ -5,12 +5,14 @@
 
 import { downloadZip } from "https://unpkg.com/client-zip/index.js";
 import "https://unpkg.com/@lottiefiles/lottie-player@0.4.0/dist/lottie-player.js";
+import "https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.js";
 import "https://unpkg.com/jquery@3.3.1/dist/jquery.min.js";
 
 class LottieToSVGFrames {
 
     // Resources:
     // https://docs.lottiefiles.com/lottie-player/components/lottie-player/usage
+    // https://docs.lottiefiles.com/dotlottie-player/methods
     // https://github.com/Touffy/client-zip
 
     elem;
@@ -120,14 +122,14 @@ class LottieToSVGFrames {
 
             // Sanity
             if (file == null) throw "File was null!";
-            if (file.type == null) throw "File type was null!";
-            if (file.type != "application/json") throw "File is not a .json file!";
+            if (file.name == null) throw "File name was null!";
+            if (file.name.endsWith(".lottie") == true) throw ".lottie is currently not supported."; //TODO
+            if (file.name.endsWith(".json") == false && file.name.endsWith(".lottie") == false) throw "File is not a .json or .lottie file!";
 
             self.files.push(file);
 
             const reader = new FileReader();
             reader.addEventListener('load', (event) => {
-                file.json = JSON.parse(event.target.result);
                 file.contents = event.target.result;
                 self.createPreview(file);
             });
@@ -166,6 +168,7 @@ class LottieToSVGFrames {
             for (let f = 0; f < numFrames; f++) {
                 file.lottiePlayer.seek(f);
                 let svgString = file.lottiePlayer.snapshot(false);
+                // Fix some oddities
 
                 let frameElem = $("<div class='frame'/>").appendTo(previewElem);
                 frameElem.append($("<h3/>").text("Frame " + (f + 1) + "/" + numFrames));
