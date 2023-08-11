@@ -11,3 +11,8 @@ No installation required, just open this in the browser:
 Do you like Lottie To SVG Frames?
 
 [Donate via PayPal](https://www.paypal.com/donate/?hosted_button_id=24F8CNC6Q49SE)
+
+## Screenshot
+
+![Lottie To SVG Frames Online free utility to convert Lottie JSON Animations to SVG Frames](https://github.com/dankrusi/Lottie-To-SVG-Frames/blob/main/screenshots/Lottie-To-SVG-Frames-Online-free-utility-to-convert-Lottie-JSON-Animations-to-SVG-Frames.png?raw=true)
+
